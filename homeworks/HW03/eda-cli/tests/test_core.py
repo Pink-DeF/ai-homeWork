@@ -71,3 +71,16 @@ def test_has_suspicious_id_duplicates():
     df = _sample_df()
     duplicated_df = compute_quality_flags(summarize_dataset(df), missing_table(df))["has_suspicious_id_duplicates"]
     assert duplicated_df == 0
+
+def test_flags():
+    df = compute_quality_flags(summarize_dataset(_sample_df()), missing_table(_sample_df()))
+
+    assert df["too_few_rows"] == 1
+    assert df["too_many_columns"] == 0
+    assert df["max_missing_share"] == 0.25
+    assert df["too_many_missing"] == 0
+    assert df["has_constant_columns"] == 1
+    assert df["has_suspicious_id_duplicates"] == 0
+
+    assert df["quality_score"] >= 0.5 and df["quality_score"] <= 0.8
+
