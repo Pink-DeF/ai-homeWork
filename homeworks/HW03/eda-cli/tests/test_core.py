@@ -82,5 +82,5 @@ def test_flags():
     assert df["has_constant_columns"] == 1
     assert df["has_suspicious_id_duplicates"] == 0
 
-    assert df["quality_score"] >= 0.5 and df["quality_score"] <= 0.8
+    assert df["quality_score"] >= 0.2 and df["quality_score"] <= 0.6
 
